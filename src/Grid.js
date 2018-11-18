@@ -1,4 +1,4 @@
-const {createElement: h, Component} = require('preact')
+const {createElement: h, Component} = require('react')
 
 class Grid extends Component {
     constructor() {
@@ -40,7 +40,7 @@ class Grid extends Component {
                 y1: `${i + .5}em`,
                 x2: xs[xs.length - 1] === width - 1 ? `${xs.length - .5}em` : `${xs.length}em`,
                 y2: `${i + .5}em`,
-                'shape-rendering': 'crispEdges'
+                shapeRendering: 'crispEdges'
             })),
 
             xs.map((_, i) => h('line', {
@@ -51,7 +51,7 @@ class Grid extends Component {
                 y1: ys[0] === 0 ? '.5em' : '0',
                 x2: `${i + .5}em`,
                 y2: ys[ys.length - 1] === height - 1 ? `${ys.length - .5}em` : `${ys.length}em`,
-                'shape-rendering': 'crispEdges'
+                shapeRendering: 'crispEdges'
             })),
 
             // Draw hoshi points

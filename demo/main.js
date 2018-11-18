@@ -1,4 +1,5 @@
-const {h, render, Component} = require('preact')
+const {createElement, Component} = require('react')
+const { render } = require('react-dom')
 const {Goban} = require('..')
 
 const chineseCoord = [
@@ -144,7 +145,7 @@ const ghostStoneMap = (() => {
 })()
 
 const createTwoWayCheckBox = (state, setState) => (
-    ({stateKey, text}) => h('label',
+    ({stateKey, text}) => createElement('label',
         {
             style: {
                 display: 'flex',
@@ -152,15 +153,15 @@ const createTwoWayCheckBox = (state, setState) => (
             }
         },
 
-        h('input', {
+        createElement('input', {
             style: {marginRight: '.5em'},
             type: 'checkbox',
-            checked: state[stateKey],
+            defaultChecked: state[stateKey],
 
             onClick: () => setState(s => ({[stateKey]: !s[stateKey]}))
         }),
 
-        h('span', {style: {userSelect: 'none'}}, text)
+        createElement('span', {style: {userSelect: 'none'}}, text)
     )
 )
 
@@ -195,7 +196,7 @@ class App extends Component {
             showHeatMap, showMarkerMap, showGhostStones,
             showLines, showSelection} = this.state
 
-        return h('section',
+        return createElement('section',
             {
                 style: {
                     display: 'grid',
@@ -204,7 +205,7 @@ class App extends Component {
                 }
             },
 
-            h('form',
+            createElement('form',
                 {
                     style: {
                         display: 'flex',
@@ -212,17 +213,17 @@ class App extends Component {
                     }
                 },
 
-                h('p', {style: {margin: '0 0 .5em 0'}},
+                createElement('p', {style: {margin: '0 0 .5em 0'}},
                     'Size: ',
 
-                    h('button', {
+                    createElement('button', {
                         type: 'button',
                         onClick: evt => {
                             this.setState(s => ({vertexSize: Math.max(s.vertexSize - 4, 4)}))
                         }
                     }, '-'), ' ',
 
-                    h('button', {
+                    createElement('button', {
                         type: 'button',
                         title: 'Reset',
                         onClick: evt => {
@@ -230,7 +231,7 @@ class App extends Component {
                         }
                     }, '•'), ' ',
 
-                    h('button', {
+                    createElement('button', {
                         type: 'button',
                         onClick: evt => {
                             this.setState(s => ({vertexSize: s.vertexSize + 4}))
@@ -238,10 +239,10 @@ class App extends Component {
                     }, '+')
                 ),
 
-                h('p', {style: {margin: '0 0 .5em 0'}},
+                createElement('p', {style: {margin: '0 0 .5em 0'}},
                     'Stones: ',
 
-                    h('button', {
+                    createElement('button', {
                         type: 'button',
                         title: 'Reset',
                         onClick: evt => {
@@ -250,23 +251,23 @@ class App extends Component {
                     }, '•')
                 ),
 
-                h(this.CheckBox, {stateKey: 'showCoordinates', text: 'Show coordinates'}),
-                h(this.CheckBox, {stateKey: 'alternateCoordinates', text: 'Alternate coordinates'}),
-                h(this.CheckBox, {stateKey: 'showCorner', text: 'Show lower right corner only'}),
-                h(this.CheckBox, {stateKey: 'showDimmedStones', text: 'Dim dead stones'}),
-                h(this.CheckBox, {stateKey: 'fuzzyStonePlacement', text: 'Fuzzy stone placement'}),
-                h(this.CheckBox, {stateKey: 'animateStonePlacement', text: 'Animate stone placement'}),
-                h(this.CheckBox, {stateKey: 'showMarkerMap', text: 'Show markers'}),
-                h(this.CheckBox, {stateKey: 'showGhostStones', text: 'Show ghost stones'}),
-                h(this.CheckBox, {stateKey: 'showPaintMap', text: 'Show paint map'}),
-                h(this.CheckBox, {stateKey: 'showHeatMap', text: 'Show heat map'}),
-                h(this.CheckBox, {stateKey: 'showLines', text: 'Show lines'}),
-                h(this.CheckBox, {stateKey: 'showSelection', text: 'Show selection'}),
-                h(this.CheckBox, {stateKey: 'isBusy', text: 'Busy'})
+                createElement(this.CheckBox, {stateKey: 'showCoordinates', text: 'Show coordinates'}),
+                createElement(this.CheckBox, {stateKey: 'alternateCoordinates', text: 'Alternate coordinates'}),
+                createElement(this.CheckBox, {stateKey: 'showCorner', text: 'Show lower right corner only'}),
+                createElement(this.CheckBox, {stateKey: 'showDimmedStones', text: 'Dim dead stones'}),
+                createElement(this.CheckBox, {stateKey: 'fuzzyStonePlacement', text: 'Fuzzy stone placement'}),
+                createElement(this.CheckBox, {stateKey: 'animateStonePlacement', text: 'Animate stone placement'}),
+                createElement(this.CheckBox, {stateKey: 'showMarkerMap', text: 'Show markers'}),
+                createElement(this.CheckBox, {stateKey: 'showGhostStones', text: 'Show ghost stones'}),
+                createElement(this.CheckBox, {stateKey: 'showPaintMap', text: 'Show paint map'}),
+                createElement(this.CheckBox, {stateKey: 'showHeatMap', text: 'Show heat map'}),
+                createElement(this.CheckBox, {stateKey: 'showLines', text: 'Show lines'}),
+                createElement(this.CheckBox, {stateKey: 'showSelection', text: 'Show selection'}),
+                createElement(this.CheckBox, {stateKey: 'isBusy', text: 'Busy'})
             ),
 
-            h('div', {},
-                h(Goban, {
+            createElement('div', {},
+                createElement(Goban, {
                     vertexSize,
                     animate: true,
                     busy: this.state.isBusy,
@@ -307,7 +308,7 @@ class App extends Component {
                     }
                 }),
 
-                alternateCoordinates && h('style', {}, `
+                alternateCoordinates && createElement('style', {}, `
                     .shudan-coordx span {
                         font-size: .45em;
                     }
@@ -317,4 +318,4 @@ class App extends Component {
     }
 }
 
-render(h(App), document.body)
+render(createElement(App), document.getElementById('app'))

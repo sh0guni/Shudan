@@ -1,4 +1,4 @@
-const {createElement: h, Component} = require('preact')
+const {createElement: h, Component} = require('react')
 const classnames = require('classnames')
 const {vertexEvents} = require('./helper')
 

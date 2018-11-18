@@ -1,4 +1,4 @@
-const {createElement: h, Component} = require('preact')
+const {createElement: h, Component} = require('react')
 const Goban = require('./Goban')
 
 class BoundedGoban extends Component {

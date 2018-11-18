@@ -17,7 +17,7 @@ $ npm install @sabaki/shudan
 To use this module, require it as follows:
 
 ~~~js
-const {h} = require('preact')
+const {h} = require('react')
 const {Goban} = require('@sabaki/shudan')
 
 const CustomComponent = props => (

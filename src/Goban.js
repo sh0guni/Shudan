@@ -1,4 +1,4 @@
-const {createElement: h, Component} = require('preact')
+const {createElement: h, Component} = require('react')
 const classnames = require('classnames')
 
 const helper = require('./helper')
@@ -12,10 +12,6 @@ class Goban extends Component {
         super(props)
 
         this.state = Goban.getDerivedStateFromProps(props)
-    }
-
-    componentWillReceiveProps(props) {
-        this.setState(Goban.getDerivedStateFromProps(props, this.state))
     }
 
     componentDidUpdate() {
